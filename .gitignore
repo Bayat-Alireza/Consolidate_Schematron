@@ -1,0 +1,13 @@
+*.pyc
+.vscode/*
+.venv/Include
+.venv/
+LIXI-Master-Schema.xsd
+implemented
+issueTemplate
+schematron
+.env
+reports
+pipfile.lock
+symLink-LIXI-Master-Schema.xsd
+__pycache__
