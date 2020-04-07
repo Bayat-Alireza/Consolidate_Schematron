@@ -1,4 +1,4 @@
-class color_printer:
+class color_printer():
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -8,76 +8,63 @@ class color_printer:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-# Print key in Header color and the message in  "WARNING", "OKBLUE", "OKGREEN" , "FAIL", "BOLD", or with "UNDERLINE"
-    @staticmethod
-    def print_key_val_warning(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.WARNING} {value}{color_printer.ENDC}")
-        print(color_printer.HEADER + key.rjust(rjust) + ": " +color_printer.WARNING + value + color_printer.ENDC)
+    colors = {
+        "HEADER" : '\033[95m',
+        "OKBLUE" : '\033[94m',
+        "OKGREEN" : '\033[92m',
+        "WARNING" : '\033[93m',
+        "FAIL" : '\033[91m',
+        "ENDC" : '\033[0m',
+        "BOLD" : '\033[1m',
+        "UNDERLINE" : '\033[4m',
+    }
+
+    @classmethod
+    def color_format_key_value(cls,key:str,value:str,colorValue:str="WARNING",rightJustify:int=0):
+        '''
+        Color print a key and value phrase
+        - key : string that describes the data
+        - value: string that descirbes key
+        - colorValue : string represention of a color 
+        # Example of colorValues are: HEADER, OKBLUE, OKGREEN, WARNING, FAIL, BOLD, UNDERLINE
+        '''
+        return "{HEADER}{key}: {colorValue}{value}{ENDC}".format(**cls.colors,key=key.rjust(rightJustify),value=value, colorValue=cls.colors[colorValue])
+
+    @classmethod
+    def color_format_string(cls,phrase:str,colorValue:str="WARNING",rightJustify:int=0):
+        '''
+        Returns colored phrase
+        - colorValue : string represention of a color 
+        * example of colorValues HEADER, OKBLUE, OKGREEN, WARNING, FAIL, BOLD, UNDERLINE
+        '''
+        return "{colorValue}{phrase}{ENDC}".format(**cls.colors,colorValue=cls.colors[colorValue],phrase=phrase.rjust(rightJustify))
+
+    @classmethod
+    def printProgressBar (cls,iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+        """
+        Call in a loop to create terminal progress bar
+        @params:
+            iteration   - Required  : current iteration (Int)
+            total       - Required  : total iterations (Int)
+            prefix      - Optional  : prefix string (Str)
+            suffix      - Optional  : suffix string (Str)
+            decimals    - Optional  : positive number of decimals in percent complete (Int)
+            length      - Optional  : character length of bar (Int)
+            fill        - Optional  : bar fill character (Str)
+            printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+        """
+        prefix = cls.color_format_string(str(prefix),"HEADER",20)
+        percent = cls.color_format_string(("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total))),"HEADER")
+        filledLength = int(length * iteration // total)
+        bar = cls.color_format_string(fill * filledLength + '-' * (length - filledLength),"OKBLUE")
+        print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+        # Print New Line on Complete
+        if iteration == total: 
+            print()
+
+if __name__=="__main__":
+    print(color_printer.color_format_key_value("Key","value","OKBLUE",18))
+    print(color_printer.color_format_string("This is a phrase","OKGREEN",18))
+
     
-    @staticmethod
-    def print_key_val_fail(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.FAIL} {value}{color_printer.ENDC}")
-        print(color_printer.HEADER + key.rjust(rjust) + ": " + color_printer.FAIL + value + color_printer.ENDC)
-
-    @staticmethod
-    def print_key_val_blue(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.OKBLUE} {value}{color_printer.ENDC}")
-        print(color_printer.HEADER + key.rjust(rjust) + ": " + color_printer.OKBLUE + value + color_printer.ENDC)
-
-    @staticmethod
-    def print_key_val_green(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.OKBLUE} {value}{color_printer.ENDC}")
-        print(color_printer.HEADER + key.rjust(rjust) + ": " + color_printer.OKBLUE + value + color_printer.ENDC)
-
-    @staticmethod
-    def print_key_val_bold(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.BOLD} {value}{color_printer.ENDC}")    
-        print(color_printer.HEADER + key.rjust(rjust) + ": " + color_printer.BOLD + value + color_printer.ENDC)    
-
-    @staticmethod
-    def print_key_val_underlined(key,value,rjust=0):
-        # print(f"{color_printer.HEADER}{key.rjust(rjust)}: {color_printer.UNDERLINE} {value}{color_printer.ENDC}")
-        print(color_printer.HEADER + key.rjust(rjust) +": " + color_printer.UNDERLINE + value + color_printer.ENDC)
-
-#  print a string in Header
-    @staticmethod
-    def print_header(string,padding=0,):
-        # print(f"{color_printer.HEADER}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.HEADER + string.rjust(padding) + color_printer.ENDC)
-
-#  print a string in yellow
-    @staticmethod
-    def print_warning(string,padding=0,):
-        # print(f"{color_printer.WARNING}{string.rjust(padding)}{color_printer.ENDC}")   
-        print(color_printer.WARNING +string.rjust(padding)+color_printer.ENDC)   
-
- #  print a string in Red   
-    @staticmethod
-    def print_fail(string,padding=0,):
-        # print(f"{color_printer.FAIL}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.FAIL + string.rjust(padding) + color_printer.ENDC)
-
- #  print a string in Blue   
-    @staticmethod
-    def print_ok_blue(string,padding=0,):
-        # print(f"{color_printer.OKBLUE}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.OKBLUE + string.rjust(padding) + color_printer.ENDC)
-
- #  print a string in Green   
-    @staticmethod
-    def print_ok_green(string,padding=0,):
-        # print(f"{color_printer.OKGREEN}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.OKGREEN + string.rjust(padding)+ color_printer.ENDC)
-
- #  print a string in Bold   
-    @staticmethod
-    def print_bold(string,padding=0,):
-        # print(f"{color_printer.BOLD}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.BOLD + string.rjust(padding) + color_printer.ENDC)
-
- #  print a string with Underline   
-    @staticmethod
-    def print_underline(string,padding=0,):
-        # print(f"{color_printer.UNDERLINE}{string.rjust(padding)}{color_printer.ENDC}")
-        print(color_printer.UNDERLINE + string.rjust(padding) + color_printer.ENDC)
 

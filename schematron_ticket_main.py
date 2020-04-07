@@ -2,13 +2,13 @@ import copy
 import logging
 import os
 
-import gitlab
 from lxml import etree
 
 from enums import Labels,SchLabels,EnhancementSections as sections
 from project import Project
 from schematronTicket import SchematronTicket
 from util import save
+from pretty_console import color_printer as printer
 
 
 try:
