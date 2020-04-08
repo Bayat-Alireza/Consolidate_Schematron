@@ -43,9 +43,9 @@ class Labels(Enum):
         return [enum.value for enum in cls]
 
 class SchLabels(Enum):
-    MANDATORY_ITEM = "MandatoryItem"
-    POLICY_RULE = "PolicyRule"
-    STRUCTURAL_RULE = "StructuralRule"
+    MANDATORY_ITEM = "MandatoryItem Rule"
+    POLICY_RULE = "Policy Rule"
+    STRUCTURAL_RULE = "Structural Rule"
     
     @classmethod
     def lblList(cls):

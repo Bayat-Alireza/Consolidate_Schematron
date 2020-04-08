@@ -20,3 +20,10 @@ class Project (Git):
     def issue(self,issue_iid):
         '''Return project issue object to perform changes '''
         return self.project.issues.get(issue_iid)
+
+    def getProjectLabels(self):
+        return self.project.labels.list()
+
+    def filterSchematronLabels(self):
+        labels = self.project.labels.list()
+        return [lbl.name for lbl in labels if "Rule" in lbl.name]
