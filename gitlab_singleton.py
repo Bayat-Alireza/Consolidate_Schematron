@@ -3,7 +3,7 @@ import gitlab
 import os
 
 baseurl = os.getenv("GITLAB_BASE_URL","") 
-lixiGitlabApi = os.getenv("SHANE_LIXI_GITLAB_API","") 
+lixiGitlabApi = os.getenv("LIXI_GITLAB_API","") 
 
 
 class SingeltonGitlab():
