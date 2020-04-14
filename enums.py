@@ -1,22 +1,8 @@
 from enum import Enum
 
 class NameSpace(Enum):
-    NAME_SPACE = ' xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lx="lixi.org.au/schema/appinfo_elements" xmlns:li="lixi.org.au/schema/appinfo_instructions"'
-class Standards(Enum):
-    CAL = 'CAL'
-    VAL = 'VAL'
-    SVC = 'SVC'
-    CNZ = 'CNZ'
-    CDA = 'CDA'
-    DAS = 'DAS'
-    ACC = 'ACC'
-    LMI = 'LMI'
-
-    @classmethod
-    def stdList(cls):
-        return [enum.value for enum in cls]
-
-
+    NAME_SPACE = ' xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:xs="http://www.w3.org/2001/XMLSchema">'
+    NS_OBJ={"sch":"http://purl.oclc.org/dsdl/schematron","xs":"http://www.w3.org/2001/XMLSchema"}
 class EnhancementSections (Enum):
     ADD_ITEM = "Add Items:"
     PROBLEM = "# Problem / Requirement Statement"

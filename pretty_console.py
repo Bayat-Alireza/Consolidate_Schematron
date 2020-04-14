@@ -40,7 +40,7 @@ class color_printer():
         return "{colorValue}{phrase}{ENDC}".format(**cls.colors,colorValue=cls.colors[colorValue],phrase=phrase.rjust(rightJustify))
 
     @classmethod
-    def printProgressBar (cls,iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    def printProgressBar (cls,iteration, total, prefix = '', suffix = '', decimals = 0, length = 70, fill = '█', printEnd = "\r"):
         """
         Call in a loop to create terminal progress bar
         @params:
@@ -54,7 +54,7 @@ class color_printer():
             printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
         """
         prefix = cls.color_format_string(str(prefix),"HEADER",20)
-        percent = cls.color_format_string(("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total))),"HEADER")
+        percent = cls.color_format_string(("{0:." + str(decimals) + "f} ").format(100 * (iteration / float(total))),"HEADER")
         filledLength = int(length * iteration // total)
         bar = cls.color_format_string(fill * filledLength + '-' * (length - filledLength),"OKBLUE")
         print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
