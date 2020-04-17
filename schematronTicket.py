@@ -53,18 +53,20 @@ class SchematronTicket ():
     def getSchematronRules(cls,schType:str):
         rule = []
         if len(cls.contextDictionary) == 0:
-            raise ValueError(f"There are no {schType} rules")
-        for ctx in cls.contextDictionary:
-            if len(cls.asserts[ctx]) == 0:
-                raise ValueError(f"{schType}: There are no asserts in the context of {ctx}")
-            rule.append(f"<sch:rule {ctx}>")
-            rule.append("".join(cls.asserts[ctx]))
-            rule.append("</sch:rule>")
-            cls.rules.append("".join(rule))
-            rule.clear()
-        cls.asserts.clear()
-        cls.contextDictionary.clear()
-        return cls.rules
+            print(f"There is no implemented {schType} ")
+            return
+        if len(cls.contextDictionary) != 0: 
+            for ctx in cls.contextDictionary:
+                if len(cls.asserts[ctx]) == 0:
+                    raise ValueError(f"{schType}: There are no asserts in the context of {ctx}")
+                rule.append(f"<sch:rule {ctx}>")
+                rule.append("".join(cls.asserts[ctx]))
+                rule.append("</sch:rule>")
+                cls.rules.append("".join(rule))
+                rule.clear()
+            cls.asserts.clear()
+            cls.contextDictionary.clear()
+            return cls.rules
 
     @classmethod
     def createSchematronDocument(cls,schTemp:str, schType:str,):
