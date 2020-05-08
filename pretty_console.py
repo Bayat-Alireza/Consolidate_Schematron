@@ -53,7 +53,7 @@ class color_printer():
             fill        - Optional  : bar fill character (Str)
             printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
         """
-        prefix = cls.color_format_string(str(prefix),"HEADER",20)
+        prefix = cls.color_format_string(str(prefix),"HEADER",24)
         percent = cls.color_format_string(("{0:." + str(decimals) + "f} ").format(100 * (iteration / float(total))),"HEADER")
         filledLength = int(length * iteration // total)
         bar = cls.color_format_string(fill * filledLength + '-' * (length - filledLength),"OKBLUE")

@@ -70,6 +70,8 @@ class SchematronTicket ():
 
     @classmethod
     def createSchematronDocument(cls,schTemp:str, schType:str,):
+        schTypeArr = schType.split(" ")
+        schType = "_".join(schTypeArr)
         if len(cls.rules):
             with open (schTemp,"r",encoding="utf-8") as f:
                 schDoc = f.read().format(pattern=schType,rules="".join(cls.rules),let="".join(cls.let))

@@ -27,3 +27,7 @@ class Project (Git):
     def filterSchematronLabels(self):
         labels = self.project.labels.list()
         return [lbl.name for lbl in labels if "Rule" in lbl.name[-4:]]
+
+    def filterStandardLables(self):
+        labels = self.project.labels.list()
+        return [lbl.name for lbl in labels if len(lbl.name)==3]
