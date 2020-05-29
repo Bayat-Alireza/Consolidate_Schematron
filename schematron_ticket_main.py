@@ -22,7 +22,25 @@ try:
     standardLabels = project.filterStandardLables()
     issues = project.project.issues.list(all=True)
 
-    # schematron template that will be used to create the schematron file 
+
+    # # Add a particular label to all tickets
+    # for i in issues:
+    #     result = set(i.labels).intersection(standardLabels)
+    #     if not result and "All Transaction" not in i.labels:
+    #         issue = project.issue(i.iid)
+    #         issue.labels.append("All Transactions")
+    #         issue.save()
+   
+#    # Add all standard labels to tickets 
+#     for i in issues:
+#         if "All Transactions" in i.labels:
+#             issue = project.issue(i.iid)
+#             for stdLbl in standardLabels:
+#                 issue.labels.append(stdLbl)
+#                 issue.save()
+                
+
+    #schematron template that will be used to create the schematron file 
     schemaTemp = os.path.join("templates","schematron.sch")
 
     std = {}
